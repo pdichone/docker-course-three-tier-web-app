@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotes Gallery</title>
+</head>
+<body>
+    <h1>Quotes Gallery</h1>
+    <form method="POST">
+        <input type="text" name="quote" placeholder="Enter a quote" required>
+        <input type="text" name="author" placeholder="Author">
+        <button type="submit">Submit</button>
+    </form>
+    <ul>
+        {% for quote in quotes %}
+            <li>"{{ quote.quote }}" - {{ quote.author }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
