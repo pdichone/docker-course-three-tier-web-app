@@ -39,9 +39,9 @@ jobs:
 
     # The following steps will only execute if the push is to the main branch
     # and all the previous steps have been successful
-    - name: Generate deployment package
-      if: github.ref == 'refs/heads/main' && success()
-      run: zip -r deploy.zip Dockerrun.aws.json .ebextensions
+    # - name: Generate deployment package
+    #   if: github.ref == 'refs/heads/main' && success()
+    #   run: zip -r deploy.zip Dockerrun.aws.json .ebextensions
 
     - name: Upload deployment package to S3
       if: github.ref == 'refs/heads/main' && success()
