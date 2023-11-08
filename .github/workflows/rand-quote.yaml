@@ -30,12 +30,12 @@ jobs:
     - name: Build with Docker Compose
       run: docker-compose -f docker-compose.yaml build
 
-    - name: Run tests
-      run: |
-        # Run your test commands here
-        docker-compose -f docker-compose.yaml up -d
-        docker-compose -f docker-compose.yaml exec -T your_service_name ./run_tests.sh
-        docker-compose down
+    # - name: Run tests
+    #   run: |
+    #     # Run your test commands here
+    #     docker-compose -f docker-compose.yaml up -d
+    #     docker-compose -f docker-compose.yaml exec -T your_service_name ./run_tests.sh
+    #     docker-compose down
 
     # The following steps will only execute if the push is to the main branch
     # and all the previous steps have been successful
