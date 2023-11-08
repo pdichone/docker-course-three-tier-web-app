@@ -2,7 +2,7 @@
 docker run id/name_of_image  # This should start a mysql connection
 
 # While the connection is open, open a new terminal so we can interact with bash in the container
-docker exec -it containername/id /bin/bash
+docker exec -it containername/id /bin/bash # or /bin/sh
 
 
 # We should now be inside our container
