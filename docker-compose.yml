@@ -2,18 +2,16 @@ version: '3.9'
 
 services:
   db:
-    container_name: quotes-db
     build: ./db
+    # image: mysql:5.7  # It's better to use a pre-built image for databases
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: quotesdb
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    volumes:
-      - db-data:/var/lib/mysql
+    # Removed volumes configuration as EB doesn't support named volumes
 
   api:
-    container_name: quotes-api
     build: ./api
     depends_on:
       - db
@@ -22,17 +20,57 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_DB: quotesdb
-    ports:
-      - "5001:5001"
+    # Removed ports configuration; EB handles port binding
 
   app:
-    container_name: quotes-frontend
     build: ./app
     depends_on:
       - api
+    # Changed to map to port 80, which is what the EB load balancer will expect for HTTP traffic
     ports:
-      - 80:80
-      # - "5002:5002"
+      - 80:5002  # Assuming your app.py is set to listen on port 5002
 
-volumes:
-  db-data:
+# Removed volumes section
+
+
+
+
+# ==== For Development works ======
+# version: '3.9'
+
+# services:
+#   db:
+#     container_name: quotes-db
+#     build: ./db
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: quotesdb
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: password
+#     volumes:
+#       - db-data:/var/lib/mysql
+
+#   api:
+#     container_name: quotes-api
+#     build: ./api
+#     depends_on:
+#       - db
+#     environment:
+#       MYSQL_HOST: db
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: password
+#       MYSQL_DB: quotesdb
+#     ports:
+#       - "5001:5001"
+
+#   app:
+#     container_name: quotes-frontend
+#     build: ./app
+#     depends_on:
+#       - api
+#     ports:
+#       - 80:80
+#       # - "5002:5002"
+
+# volumes:
+#   db-data:
