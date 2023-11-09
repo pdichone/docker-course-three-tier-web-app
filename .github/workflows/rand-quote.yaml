@@ -42,7 +42,7 @@ jobs:
     # - name: Generate deployment package
     #   if: github.ref == 'refs/heads/main' && success()
     #   run: zip -r deploy.zip Dockerrun.aws.json .ebextensions
-    # do the work!
+    # do the work - TEST AGAIN!
     - name: Upload deployment package to S3
       if: github.ref == 'refs/heads/main' && success()
       uses: actions/upload-artifact@v2
