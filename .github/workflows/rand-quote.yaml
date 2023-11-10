@@ -1,65 +1,54 @@
-name: Docker Compose CI/CD to Elastic Beanstalk
+#==== This is for beanstalk === NOT WORKING! =====
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
-jobs:
-  build-test-deploy:
-    runs-on: ubuntu-latest
+# name: Docker Compose CI/CD to Elastic Beanstalk
 
-    steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+# jobs:
+#   build-test-deploy:
+#     runs-on: ubuntu-latest
 
-    - name: Cache Docker layers
-      uses: actions/cache@v2
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
+#     steps:
+#     - name: Check out repository
+#       uses: actions/checkout@v2
 
-    - name: Build with Docker Compose
-      run: docker-compose -f docker-compose.yml build
+#     - name: Set up Docker Buildx
+#       uses: docker/setup-buildx-action@v1
 
-    # - name: Run tests
-    #   run: |
-    #     # Run your test commands here
-    #     docker-compose -f docker-compose.yaml up -d
-    #     docker-compose -f docker-compose.yaml exec -T your_service_name ./run_tests.sh
-    #     docker-compose down
+#     - name: Cache Docker layers
+#       uses: actions/cache@v2
+#       with:
+#         path: /tmp/.buildx-cache
+#         key: ${{ runner.os }}-buildx-${{ github.sha }}
+#         restore-keys: |
+#           ${{ runner.os }}-buildx-
 
-    # The following steps will only execute if the push is to the main branch
-    # and all the previous steps have been successful
-    - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*'
-    # do the work - TEST AGAIN!
-    # - name: Upload deployment package to S3
-    #   if: github.ref == 'refs/heads/main' && success()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: deployment-package
-    #     path: deploy.zip
+#     - name: Build with Docker Compose
+#       run: docker-compose -f docker-compose.yml build
 
-    - name: Deploy to Elastic Beanstalk
-      # if: github.ref == 'refs/heads/main' && success()
-      uses: einaregilsson/beanstalk-deploy@v21
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: us-west-2
-        application_name: bonni-test
-        environment_name: Bonni-test-env
-        version_label: ${{ github.run_number }}-${{ github.sha }}
-        deployment_package: deploy.zip
 
-        # bucket_name: rando-bucket-test-me-today
-        # bucket_key: deploy.zip
+#     # The following steps will only execute if the push is to the main branch
+#     # and all the previous steps have been successful
+#     - name: Generate deployment package
+#       run: zip -r deploy.zip . -x '*.git*'
+    
+#     - name: Deploy to Elastic Beanstalk
+#       # if: github.ref == 'refs/heads/main' && success()
+#       uses: einaregilsson/beanstalk-deploy@v21
+#       with:
+#         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         region: us-west-2
+#         application_name: bonni-test
+#         environment_name: Bonni-test-env
+#         version_label: ${{ github.run_number }}-${{ github.sha }}
+#         deployment_package: deploy.zip
+
+    

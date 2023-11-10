@@ -69,8 +69,8 @@ services:
     depends_on:
       - api
     ports:
-      - "80:5000" # for beanstalk
-      # - "5002:5002"
+      # - "80:5000" # for beanstalk
+      - "5002:5002"
 
 volumes:
   db-data:

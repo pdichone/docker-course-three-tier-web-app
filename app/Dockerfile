@@ -6,7 +6,7 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 5000 
+EXPOSE 5002 
 
 # 5002 this is for local dev
 
