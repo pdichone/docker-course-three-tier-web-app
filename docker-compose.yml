@@ -47,8 +47,8 @@ services:
       MYSQL_DATABASE: quotesdb
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    volumes:
-      - db-data:/var/lib/mysql
+    # volumes:
+    #   - db-data:/var/lib/mysql
 
   api:
     container_name: quotes-api
@@ -60,8 +60,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_DB: quotesdb
-    ports:
-      - "5001:5001"
+    # ports:
+    #   - "5001:5001"
 
   app:
     container_name: quotes-frontend
