@@ -6,7 +6,7 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 80  
+EXPOSE 5002 
 # 80 is expected for beanstalk
 # 5002 this is for local dev
 
