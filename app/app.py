@@ -54,8 +54,12 @@ import requests
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    # if request.method == "POST":
+    #     quote = request.form["quote"]
+    #     author = request.form["author"]
+
     return render_template("test.html")
 
 

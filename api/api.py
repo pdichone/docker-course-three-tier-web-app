@@ -13,7 +13,10 @@ api.config["MYSQL_DB"] = os.getenv("MYSQL_DB", "quotesdb")
 mysql = MySQL(api)
 
 
-@api.route("/api/quotes", methods=["GET"])
+@api.route(
+    "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes",
+    methods=["GET"],
+)
 def get_quotes():
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM quotes")
@@ -22,12 +25,18 @@ def get_quotes():
     return jsonify([{"id": q[0], "quote": q[1], "author": q[2]} for q in quotes])
 
 
-@api.route("/health", methods=["GET"])
+@api.route(
+    "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/health",
+    methods=["GET"],
+)
 def health():
     return "OK", 200
 
 
-@api.route("/api/quotes", methods=["POST"])
+@api.route(
+    "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes",
+    methods=["POST"],
+)
 def add_quote():
     content = request.json["quote"]
     author = request.json["author"]
