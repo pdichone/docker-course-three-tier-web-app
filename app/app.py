@@ -56,11 +56,19 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # if request.method == "POST":
-    #     quote = request.form["quote"]
-    #     author = request.form["author"]
-
-    return render_template("test.html")
+    if request.method == "POST":
+        quote = request.form["quote"]
+        author = request.form["author"]
+        # requests.post(
+        #     "http://api:5001/api/quotes", json={"quote": quote, "author": author}
+        # )
+        requests.post(
+            "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes",
+            json={"quote": quote, "author": author},
+        )
+        return redirect(url_for("index"))
+    else:
+        return render_template("test.html")
 
 
 # for beanstalk deployment use the url that we created:
