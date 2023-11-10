@@ -54,28 +54,33 @@ import requests
 app = Flask(__name__)
 
 
+@app.route("/")
+def index():
+    return render_template("test.html")
+
+
 # for beanstalk deployment use the url that we created:
 ## quotes-app-itox.us-west-2.elasticbeanstalk.com
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        quote = request.form["quote"]
-        author = request.form["author"]
-        # requests.post(
-        #     "http://api:5001/api/quotes", json={"quote": quote, "author": author}
-        # )
-        requests.post(
-            "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes",
-            json={"quote": quote, "author": author},
-        )
-        return redirect(url_for("index"))
-    else:
-        # quotes = requests.get("http://api:5001/api/quotes").json()
-        # return render_template("index.html", quotes=quotes)
-        quotes = requests.get(
-            "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes"
-        ).json()
-        return render_template("index.html", quotes=quotes)
+# @app.route("/", methods=["GET", "POST"])
+# def index():
+#     if request.method == "POST":
+#         quote = request.form["quote"]
+#         author = request.form["author"]
+#         # requests.post(
+#         #     "http://api:5001/api/quotes", json={"quote": quote, "author": author}
+#         # )
+#         requests.post(
+#             "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes",
+#             json={"quote": quote, "author": author},
+#         )
+#         return redirect(url_for("index"))
+#     else:
+#         # quotes = requests.get("http://api:5001/api/quotes").json()
+#         # return render_template("index.html", quotes=quotes)
+#         quotes = requests.get(
+#             "http://bonni-test-env.eba-h7hph2uq.us-west-2.elasticbeanstalk.com/api/quotes"
+#         ).json()
+#         return render_template("index.html", quotes=quotes)
 
 
 # new
